@@ -28,7 +28,7 @@ resource_name :sensu_backend
 include SensuCookbook::Helpers
 
 property :version, String, default: 'latest'
-property :repo, String, default: 'sensu/nightly'
+property :repo, String, default: 'sensu/stable'
 property :config_home, String, default: '/etc/sensu'
 property :config, Hash, default: { "state-dir": '/var/lib/sensu' }
 
@@ -40,7 +40,7 @@ action :install do
     )
   end
 
-  package 'sensu-backend' do
+  package 'sensu-go-backend' do
     if latest_version?(new_resource.version)
       action :upgrade
     else
